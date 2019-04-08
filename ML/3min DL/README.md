@@ -60,9 +60,10 @@ pip install numpy matplotlib pillow
 2. matplotlib - 그래프 출력 라이브러리
 3. pillow - 이미지 출력 라이브러리
 
+----------------------------
 
-
-
+## 복잡한 계산시
+- 구글이 제공하는Cloud ML에 올려서 활용
 
 
 
