@@ -1,0 +1,127 @@
+텐서플로 첫걸음 kmeans 건너뜀
+
+원-핫 인코딩(One-hot encoding)
+  데이터를 범주형 데이터로 만들어서 사용하는 기법
+  
+텐서플로우
+pip install --upgrade tensorflow
+수치 연산을 표현한 그래프 구조를 만들고 처리(연산을 만들고 세션을 열어 처리하는것)
+그래프와 세션
+  텐서플로우는 파이썬안에 또 다른 언어라 그런지 코드를 실행하기위한 작업을 두번 처리해줘야되는 낯선 개념이다
+  그래프는 사용자가 A * B + C와 같은 수식을 정의해 놓는 것이라 보면 되고
+  세션(session)은 세션을 생성하여 정의된 그래프를 인자값으로 받아 실행해주는 실행자라고 보면됨
+잡다한 함수들
+  tf.random_uniform([m,n],num1,num2): m x n의 행렬을 만들면서 num1~num2사이의 랜덤값으로 채워넣음. 균등분포
+  tf.random_normal: 정규분포를 따르는 난수로 텐서 생성
+  tf.truncated_normal: 정규분포를 따르는 난수로 텐서를 생성하되, 크기가 표준편차의 2배보다 큰 수는 제거
+  tf.random_shuffle: 첫번째 차원을 기준으로 텐서의 원소를 섞음
+  tf.set_random_seed: 난수 시드를 설정함
+  tf.zeros_like: 모든 원소를 0으로 초기화한 텐서를 생성
+  tf.ones_like: 모든 원소를 1로 초기화한 텐서를 생성
+  tf.shape: 구조를 반환
+  tf.size: 크기를 반환
+  tf.rank: 차원 반환
+  tf.reshape: 원소유지하면서 구조 변경
+  tf.squeeze: 크기가 1인 차원 삭제
+  tf.expand_dims: 차원 추가
+  tf.slice: 일부분 삭제
+  tf.split: 한차원을 기준으로 여러개의 차원으로 분할
+  tf.tile: 한텐서를 여러번 중복해서 새 텐서 생성
+  tf.concat: 한 차원을 기준으로 텐서를 이어 붙임
+  tf.reverse: 텐서의 지정된 차원을 역전시킴
+  tf.trainspose: 텐서를 전치? 바꿈? 뭐여 이거
+  tf.gather: 인덱스에 따라 텐서의 원소를 모음
+자료형
+  상수형(Constant)
+  약간 변경할 수 없는 변수를 선언하는 느낌?
+	tf.constant(value, dtype=None, shape=None, name='Const', verify_shape=False)
+	  value: 상수의 값
+	  dtype: 상수의 데이터 형. tf.float32와 같이 실수, 정수등의 데이터 타입 정의
+	  shape: 행렬의 차원 정의. shape=[3,3]일 경우 3 x 3 행렬을 저장 행,렬
+	  name: 상수의 이름을 정의
+  플레이스 홀더(Placeholder)
+	학습용 데이타를 담는 그릇. 일종의 통같은 개념. 채워져 있지 않음
+	학습데이터를 넣는 작업을 피딩(feeding)이라고 함. sess.run(y,feed_dict={x:input_data})
+	tf.placeholder(dtype,shape,name)
+	  dtype: 플레이스 홀더에 저장되는 데이터형. tf.float32와 같이 실스, 정수 등의 데이터 타입 정의
+	  shape: 행렬의 차원을 정의. shape=[r,c]면 r x c의 행렬을 저장함. 행 x 렬
+	  name: 이름을 정의함
+  변수형(Variable)
+	y=W*x + b라는 가설이 있을때 x가 입력데이터라면 W와 b는 학습을 통해 구해야 하는 값이 됨. 이 값이 변수(Variable)이라함
+	W = tf.Variable([num], dtype=tf.float32)
+	b = tf.Variable([num], dtype=tf.float32)
+곱셈
+  곱하려는 두 행렬X,Y가 각각 m1 x n1, m2 x n2일때 n1과 m2의 숫자가 일치하여야함
+  X = tf.constant([num1, num2, num3])
+  Y = tf.constant([[num1],[num2],[num3]])
+  tf.matmul(X,Y)하면 num1*num1 + .. num3*num3해서 답만 나옴
+브로드 캐스팅
+  행렬 계산시 차원이 맞아야 하는데 차원이 맞지 않아도 계산이 됨
+  그 이유는 행렬을 자동으로 늘려줘서 차원을 맞춰주기 때문. 줄이는건 안됨
+행렬 차원 용어
+  행렬의 차원을 Rank라고 함
+  Rank0 Scalar: 행렬이 아닌 숫자나 상수
+  Rank1 Vector: 1차원 행렬
+  Rank2 Matrix: 2차원 행렬
+  Rank3 3-Tensor: 3차원 행렬, cube
+  Rankn n_Tensor: 4차원이상 행렬, N차원 행렬
+코스트(비용) 함수
+  더 좋은 결과를 얻기 위해 매개변수를 수정할 때 정확성이 개선되고 있는지 확인하는 함수
+  손실함수 목록
+   Absolute Error: tf.reduce_sum(tf.abs(y_true–y_model))
+   Squares Error: tf.reduce_sum(tf.square(y_true–y_model))
+   Croos Entropy: tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_true, logits=y_model))
+학습모형
+  보통 비용함수를 정의 한후(위에 써놓은거) 최적화 알고리즘을 사용
+  loss = tf.reduce_mean(tf.square(logits=수식, labels=수식에대한결과값)
+  optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.05) #보통 그래디언트 경사하강법을 많이 사용함
+  train = optimizer.minimize(loss)
+  나중에 sess.run(train)하고 중간에 학습이 잘 되고 있는지 print(Variable변수)해서 찍어보고.. 대충 이렇게 사용함
+init = tf.global_variables_initailizer() #또한 초기화도 해줘야됨
+sess.run(init) 또는 init.run()
+
+tf.reset_default_graph()
+인공신경망	
+
+
+다중계층 인공신경망
+최적화 방법
+  GradientDescent 이외에도 Adagrad, RMSPRop, Adam 등이 있음(스텝의 크기가 알고리즘에 의해 조절됨)
+  시그널이 여러 은닉층을 통해 전파됨
+  전파 과정에서 시그널이 손상되거나 폭팔적으로 증가할 수도 있음
+  시그널 손실 문제는 ReLu 활성화 함수 사용으로 완화 할 수 있음
+가중치 초기화
+  1과 같은 상수로 초기화 하는 것은 좋지 않음
+  랜덤으로 초기화 해도 학습에 지장을 초래 할 수 있음
+  전파 과정에서 시그널이 손실되거나 폭팔적으로 커질 수 있기 때문
+  가중치 초기화 이론
+	순전파 과정을 가정하면, 개개 노드에서는 이전 층의 시그널이 합쳐 모임
+	
+과적합 문제
+  다중 계층 신경망에서는 과적합 문제가 쉽게 발생할 수 있음
+  해결방법은 다음과 같음
+  - L1 L2 정규화
+  - 드롭아웃 (drop out): 학습 도중 랜덤으로 노드를 배제하여 의존 상황 회피
+  - 데이터 확장; 데이터에 노이즈 추가, 이미지 데이터의 변형 등
+  
+합성곱 신경망(CNN): 생물학적 유래
+보통 신경망은 이전 측의 노드가 다음 층의 모든 노드들과 완전희 연결되어 있음
+합성곱 층에서는 이전 층의 노드가 다음 층의 노드들과 부분적으로 연결되어 있음
+- 인접한 픽셀들 사이에 상관성이 가장 강하다는 전제에 기반
+- 파라미터의 개수가 감소하며 이미지의 부분적인 특성을 인식하는데 유리
+- 정규화(regularization) 효과도 있음
+여러겹의 합성곱 층과 풀링(서브샘플링) 층이 반복되는 구조
+마지막으로는 완전 연결된(Fully connected) 층을 지나서 출력층으로 연결됨
+
+순환 신경망(RNN)
+적용분야: 시계열, 자연어, 음성
+
+AutoEncoder
+차원 축소 목적으로 사용
+입력노드 개수 = 출력노드 개수
+은닉층 노드의 개수는 작아짐
+
+Tensor Board
+Tensorflow가 실행되는 동안 기록된 로그를 사용하여 시각화 하는 도구
+시각화에 필요한 정보는 요약 데이터(summary data)가 포함된 이벤트 파일 형태로 저장됨
+FileWriter 클래스 객체를 생성하며 저장경로(logdir)를 설정함

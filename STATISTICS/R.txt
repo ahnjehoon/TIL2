@@ -1,0 +1,239 @@
+##2018-11-28 수-R 수업 시작##
+R - R Studio IDE를 기본적으로 사용
+ex_packages로 여러 패키지들 설치
+실행 단축키 : CTRL + ENTER
+값 대입
+  강제 되는 것은 아니지만 약속 같은 개념
+  '=' 함수 인자에 값 대입
+  '<-' 변수에 값 대입 '->'이런식으로 오른쪽으로 대입하는것도 되는데 권장하진 않음
+  mean(x=c(1,2,3))의 값은 나오지만 x는 안나옴
+  mean(x<-c(1,2,3))의 값도 반환되고 x도 반환
+  즉, R에서는 <-(화살표) 써라
+데이터 종류
+  명목형 변수: 순서를 정할 수 없음 ex)성별, 혈액형
+  순서형 변수: 순서를 정할 수 있음 ex)점수, 등급
+  이산형 변수: 정수, 자연수
+  연속형 변수: 실수  
+기본적인 자료형
+  벡터(vector): 하나 이상의 숫자, 문자 등의 집합
+  행열(Matrix): 벡터를 행과 열로 가지는 표 형식으로 확장
+  리스트(list): 벡터의 집합을 원소로 가지는 데이터 형태
+  데이터 프레임(data frame): 벡터의 길이가 모두 같을 때
+Vector(벡터)
+  기본적으로 c()를 사용
+  벡터 연산의 결과는 벡터
+  생성법
+    1:5										# 1부터 5까지 1씩 증가하는 벡터
+	5:-5									# 5부터 -5까지 -1씩 감소하는 벡터
+	rep(1:3, length=10)					# 벡터 (1, 2, 3, 4, 5)를 두번 반복
+	seq(1, 10, length=7)				# 1부터 10까지를 7등분한 벡터(1.5씩 쪼갬)
+	seq(1, 10, by=2)  					# 1부터 10까지 2씩 증가하는 벡터
+	sequence(c(3, 6, 5))					# 패턴을 가지는 벡터
+	unique(rep(1:3, length=10))		# 중복된 값을 제외한 벡터
+	numeric(10)							# 0을 10개 늘어놓은 벡터
+  함수
+    is.vector(v): 벡터 여부 확인. 반환값 logical
+	length(v): 벡터 길이 확인. 반환값 integer
+Matrix (행렬)
+  기본 생성 구문
+     matrix(vector,nrow=숫자,ncol=숫자,byrow=T/F)	#vector의 length는 nrow*ncol여야 하며 byrow=T일시 행순서대로 F일시 열순서대로
+  함수
+    matrix[v,]: 특정 행 반환
+	matrix[,v]: 특정 열 반환
+	matrix[v,v]: 특정 값 반환
+    dim(matrix): 열갯수, 행갯수 반환
+    cbind(matrix,vector): 열 합침
+	rbind(matrix,vector): 행합침
+    colMeans(matrix): 열별 합의 평균
+	colSums(matrix): 열들의 합
+	rowMeans(matrix): 행별 합의 평균
+	rowSums(matrix): 행들의 합
+	rownames(matrix): 행의 이름을 지정해줌. NULL 값 박으면 초기화
+	colnames(matrix): 열의 이름을 지정해줌. NULL 값 박으면 초기화
+    sum(matrix): 행열 전체 합 반환
+Factor (요인)
+  명목형변수를 등급으로 나타낸것
+  연속형변수도 구간을 나눠 등급을 지정가능?
+  값별로 순서, 비교가 가능함
+  levels=[벡터]: 사용자가 직접 순서 지정가능
+  ordered: factor속성중 하나. 기본 FALSE며 TRUE변경시 R 자체적으로 정렬해줌
+  as.numeric(FACTOR): 정렬된 값에 따라 순서별 등급을 매겨 결과 반환
+Data Frame
+  2차원 행열과 다른점은 numeric, Integer, logical 자료형이 각 열별로 설정가능
+  2차원은 charactor값 있으면 행열 전체가 charactor로 변환되는것과 대조됨
+  head(df),tail(df),: head는 위에서, tail은 아래에서 행의 데이터를 보여줌. 더보고 싶으면 df,value 형태로 작성. DEFAULT = 6
+  검색시 df[조건] || subset(df, subset=(조건))으로 검색 가능
+  주의: df[] 대괄호 하나일 때 컬럼 전체를 가져옴
+  함수
+    df[grep("value",df$colname),]: value값이 포함된 df반환
+	str(df): 테이블 속성 반환
+List (목록)
+   별거별거 다담는 애임
+Scoping rule (범위)
+  search()
+    R은 기본적으로 GlovalEnv의 변수를 최우선으로 참조함
+	추후 추가되거나 사용되는 패키지는 참조변수영역에서 LILO 알고리즘에 의해 관리되는듯
+	attach()로 패키지 붙이고 detach()로 뗄수 있음
+  with: attach()로 붙이지 않고 특정 패키지나 변수 사용 가능
+  <<-: 기본 정의 하는 <- 화살표와는 다르게 <<-는 전역변수 형태로써 저장함  
+table (도수분포표로 만듦)
+  table(DATA의 열): 동일 값의 수를 세어 반환함
+문자열 처리
+  함수
+    tolower(): 소문자화
+	toupper(): 대문자화
+	strsplit(): 문자열 쪼개서 list반환
+	paste(): 공백 있게 문자열 병합
+	paste0(): 공백 없이 문자열 병합
+	sub("바꿀문자열", "변환된문자열", "문자열"): 패턴 나오면 특정 문자로 교체(처음만나는거 한번만)
+	gsub("바꿀문자열", "변환된문자열", "문자열"): 패턴 나오면 특정 문자로 교체(여러번)
+	nchar("문자열"): 문자열 길이 반환
+	substr("문자열",시작숫자,끝숫자): 문자열 자름 1부터 시작
+	grep("찾을문자열", v, value="T/F"): 벡터에 문자열있으면 위치 반환. value=T일시 벡터값 반환
+	grepl("찾을문자열", v): 벡터에 문자열 있으면 logical 반환
+	
+	
+	
+##20181203 시각화 R 연장##
+다변량 데이터를 요약해서 보여주려는 목적(상자그림, 히스토그램, 막대그림, 파이 등)
+분석가 본인의 직관적인 이해를 우선시 함
+명목형 변수상에서 외상치는 파이차트상에서 큰 부분을 제외한 자잘한 부분(정확하지 않음)
+대표적인 시각화 함수 base, lattice, ggplot2
+상자그림(boxplot)
+  1사분위수, 중앙값, 제3사분위수
+  수염(upper whisker - lower whisker) 이외의 데이터. 즉 그래프상 점들은 이상치에 해당됨
+  DATA가 두개 들어 왔을때 X,Y로 구분되며 X는 명목형변수여야함
+  옵션
+    col="색상"
+	title(""): 타이틀 추가
+히스토그램
+  옵션
+    rug: 빈도수를 나타냄. 촘촘하면 빈도수가 높아 그래프길이가 더 큼
+    break: 계급의 개수. 100이면 막대가 100개 나타난다고함
+    abline: 기준선? 같은거 만듦 ex)abline(m,col="red",lty="dashed")
+      v는 가로 값에 대한 세로선
+  	  h는 세로 값에 대한 가로선
+막대그림
+  옵션
+	title: 타이틀
+	  xlab: x축에 그림
+	  ylab: y축에 그림
+plot() 함수
+  generic function으로써, 데이터에 맞게 시각화하여 보여줌, barplot, boxplot, plot
+  알록달록하게 하고 싶으면 library(RColorBrewer) 사용해서 col에 brewer.pal을 적용하자
+  옵션
+    xlab, ylab: X,Y 축의 이름
+	main: 그래프 제목
+	pch: 점의 종류
+	  0~25: 특수문자
+	  32~127: ASCII 코드
+	cex: 점의 크기
+	col: 색상
+	xlim, ylim: X,Y축의 값 범위
+	type: 점p, 선l, 점+선b, 점+선o(선이 점을 뚫고감)
+	  type="l" 주의점: 정렬이 안되있을 경우 그래프가 뒤죽박죽으로 보임. sort()를 사용하자
+  	    DATAX와 DATAY가 있고 SORT가 안됬을 경우 리스트를 사용하면
+		DATAX가 SORTING되면서 해당 INDEX값의 DATAY가 같이 따라가게됨
+	  lty: line type 선옵션
+	    solid: 직선
+		dotted: 점선
+		dotdash: 점직선?
+    jitter: 노이즈 추가하여 겹치는 값 분리
+  추가요소
+    points(): 점추가
+	lines(): 꺾은선 추가
+	abline(): 가로선, 세로선, 추세선 등을 추가
+	curve(): 곡선 추가
+	polygon(): 다각형 추가
+qplot()
+  기본 시각화 시스템의 plot()과 유사하지만 더욱 강력함
+ggplot  
+  aesthetic mappings(미적 매핑): 컬러, 사이즈, 모양, 등
+  geoms: 선, 점, 등의 기하학적 객체
+  facet: 조건부 플로팅
+  객체를 순차적으로 추가
+  기본사용구문: ggplot(데이터, aes(x=x축컬럼데이터, y=y축컬럼데이터, colour=표시할컬럼) + 사용할 옵션들
+  옵션
+    geom_bar(): 막대 그림. position="dodge"로 겹치지 않게 width=num으로 막대 폭조절가능
+	geom_point(): 그래프상 점으로 데이터 표시, size=num으로 크기조절가능
+	  aes(col=데이터A, shape=데이터B) 옵션 추가시 A와 B데이터를 묶어서 그래프상에 표기
+	geom_line(): 선으로 데이터 표시, size조절가능
+	geom_histogram(): 히스토그램으로 표시
+	  binwidth로 데이터 세밀도?를 fill로 색상 조절가능
+	facet_grid(): 조건부 시각화(패널나눔)
+	  ex) facet_grid(.~gender)하면 gender가 열별로 정리 (gender~.)하면 gender가 행별로 정리
+	geom_smooth(): method="lm"하면 선형회귀 추세선 표기됨
+	테마들: theme_wsj(), theme_bw(), theme_economist()
+물결표시 ~
+  연산의 대상 ~ 유형	
+	
+#########20181205 데이터 획득과 가공 수업 시작#########
+Tidy 데이터: 컴퓨터가 읽을 수 있는 깔끔한 데이터
+  일관성을 유지해야 함
+  열(column): 변수, 특성
+  행(row): 관측치
+  셀(cell): 하나의 셀에는 하나의 값을 담음
+  Tidy하지만 Tidy하다 느끼지 않을 때의 예시
+    년도,국가를 각 행과 열로 가지는 스프레드 시트의 판매량을 만들때
+  데이터가 tidy하지 않은 경우들
+    gather() 또는 melt(): 하나의 변수가 여러 열(column)에 걸쳐서 표현
+	  gather(데이터, 합칠열1, 합칠열2 ..., key="합쳐서생길열이름" value="합쳐서생길값의열이름")
+	  melt(데이터, id.vars="
+	spread(): 하나의 관측치가 여러 행(row)에 걸쳐서 표현
+	separate(): 하나의 셀에 여러 값이 들어있음
+데이터 가공
+aggregate()함수를 사용하여 데이터를 그룹으로 나눠서 처리가능
+  aggregate(조작을가할열1,열2... ~ 기준이되는열1,열2...,데이터테이블,적용할함수,na.rm=T) #na.rm은 결측값을 통계에 적용할것인지	
+plyr 패키지
+  (dd, dl, da, ld, ll, la, ad, al, aa)ply가 있음
+  앞글자는 어떤 데이터로 받고 뒷글자는 어떤 데이터로 반환할지를 뜻함  
+  ddply(데이터, "정렬할열(따옴표써야됨)",함수)
+    summarise사용시 정렬된 값에 대한 함수값 적용하여 열별 적용값을 반환
+	ex) ddply(df,"bloodtype",summarise, MeanHeight=mean(height), MaxHeight=max(height), MinHeight=min(height))
+	transform 사용시 정렬된 값에 대한 함수값을 새로운 열에 추가하여 반환
+	ex) ddply(df,"bloodtype",transform, MeanHeight=mean(height))
+  
+  
+  
+  
+ ###############################################################
+통계 용어 정리
+  중위수: 데이터 정렬 했을때 가장 가운데 있는 값
+  도수분포표  
+    명목형 변수의 도수(=거듭된 횟수)를 정리한 표
+    상대도수분포표는 도수의 상대적인 비율을 나타냄
+    연속형 변수의 경우 구간(계급)으로 잘라주어 명목형 변수와 유사하게 만들어줘야함
+  사분위수
+    데이터 표본을 4개의 동일한 부분으로 나눈 값
+    제1 사분위수(Q1): 데이터의 25%가 이 값보다 작거나 같음
+	제2 사분위수(Q2): 중위수 데이터의 50%가 이 값보다 작거나 같음
+	제3 사분위수(Q3): 데이터의 75가 이 값보다 작거나 같음
+	사분위간 범위: 제 1사분위수와 3사분위수간의 거리(Q3-Q1), 데이터 중간 50%에 대한 범위
+  
+함수
+  table(): 도수분포표??
+  랜덤
+    rnorm(v): 정규분포 랜덤 넘버 생성
+	sample(v,replace="T"): 벡터에서 무작위로 뽑음. replace하면 중복 허용
+  mean(): 평균
+  is.na(): 결측치 갯수 반환
+  sd()  
+  apply
+	lapply(x,function): List 또는 DataFrame의 원소를 루프. list 객체 반환
+	  ex) x<- seq(3,10,2)이면서 lapply(x,rnom)이면 list반환하면서 
+    sapply(x,function): 간단결과?
+	  sapply(v,mean): 항목별 평균
+	  sapply(v,sd): 항목별 표준편차
+	tapply(x,y,z... ,function): 부분적 적용
+	mapply: 다중
+  sort()
+    decreasing=T 옵션 추가시 거꾸로 정렬
+  method("함수명")
+    해당 함수가 갖고 있는 메소드를 결과값으로 뱉음
+팁
+   어떤 특정한 데이터의[DATA] INDEX값[IDX]이 있을경우 INDEX의 해당하는 값만 뽑아내는 출력법 = DATA[IDX]
+  
+    
+R Markdown
+  R의 실행 결과가 HTML, PDF, 워드? 파일로 나옴
+  별로 중요한거같지 않음. 나중에 필요할때 다시보는거로..
