@@ -1,5 +1,11 @@
 # 골빈해커의 3분 딥러닝 텐서플로맛
 
+- 코드출처
+
+  <https://github.com/golbin/TensorFlow-Tutorials>
+
+  몇몇코드는 다른 데이터셋 써서 했던거도 있음
+
 - 책을 마친 후 추가 공부 자료들
 
   - 모두를 위한 머신러닝/딥러닝(<https://hunkim.github.io/ml/>)
