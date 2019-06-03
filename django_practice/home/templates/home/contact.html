@@ -1,0 +1,8 @@
+{% extends 'home/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<h1>{{ content }}</h1>
+<h2>응답받은거 : {{ request_param }}</h2>
+{% endblock %}

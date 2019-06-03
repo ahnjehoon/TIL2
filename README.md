@@ -1,6 +1,12 @@
-# GIT 초기 설정
+# GIT
 
----
+## GIT IO? 만들기
+
+1. 새로운 리파지토리 생성
+
+2. [username].github.io
+
+## GIT 초기 설정
 
 ### 설정
 
@@ -112,6 +118,18 @@
   # master 브랜치를 fetch하여 업데이트
   git fetch origin master
   ```
+
+### 소스 받기
+
+#### 처음 받았을 때
+
+- git clone [주소] [폴더이름]
+
+#### 이후 업데이트 계속 받을 때
+
+- 해당 폴더 들어가서
+
+- git pull
 
 ## 소스 복원
 

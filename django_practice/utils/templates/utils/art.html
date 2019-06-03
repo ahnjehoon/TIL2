@@ -1,0 +1,11 @@
+{% extends 'utils/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<h1>타이틀 : {{ title }}</h1>
+<h2>키워드 : {{ keyword }}</h2>
+<div>
+    <pre>{{ result }}</pre>
+</div>
+{% endblock %}
