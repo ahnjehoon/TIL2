@@ -1,0 +1,12 @@
+{% extends 'utils/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<h1>타이틀 : {{ title }}</h1>
+<form action="/utils/stock_output/" method="GET">
+<!--    {% csrf_token %}-->
+    <input type="text" placeholder="값을 입력해주세요" name="company_code" autofocus>
+    <input type="submit" value="검색!">
+</form>
+{% endblock %}
