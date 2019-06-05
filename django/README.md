@@ -239,7 +239,11 @@ article.delete()
 ### 생성방법
 
 - python manage.py makemigrations [앱이름]
+
+  결제서류 만들기
 - python manage.py migrate [앱이름]
+
+  결제 하기
 
 ### 간단 테스트
 
@@ -253,10 +257,33 @@ from [앱이름].models  import [클래스이름]
 [변수명] = [클래스이름]()			# 새롭게 인스턴스 생성
 [변수명].[DB요소] = [값]				# DB요소에 값 대임
 [변수명].save()					# DB에 값 삽입
-
 ```
 
 
+
+## 관리자(ADMIN) 페이지
+
+1. python manage.py makemigrations
+
+   전체 체크
+
+2. python manage.py migrate
+
+   모든 숨겨진 결재를 실행
+
+3. python manage.py createsuperuser
+
+   절대관리자를 생성
+
+4. DOMAIN/admin 에 접속
+
+5. 로그인
+
+### 관리자 페이지에 등록
+
+- admin.py에 등록
+
+  admin.site.register([클래스])
 
 
 

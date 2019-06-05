@@ -1,0 +1,24 @@
+{% extends 'board/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block body %}
+<h1>타이틀 : {{ title }}</h1>
+
+<table CLASS="table">
+    <tr>
+        <td>id</td>
+        <td>title</td>
+        <td>content</td>
+    </tr>
+    {% for article in articles %}
+    <tr onclick="location.href='/board/{{ article.id }}'">
+        <td>{{ article.id }}</td>
+        <td>{{ article.title }}</td>
+        <td>{{ article.content }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
