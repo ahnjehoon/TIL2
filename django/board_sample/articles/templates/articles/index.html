@@ -1,0 +1,29 @@
+{% extends 'articles/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<h1>{{ title }}</h1>
+<table class="table">
+	<thead>
+	<tr>
+		<th scope="col">번호</th>
+		<th scope="col">제목</th>
+		<th scope="col">내용</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% if articles %}
+		{% for article in articles %}
+		<tr onclick="location.href='{% url 'articles:detail' article.id %}'">
+			<td>{{ article.id }}</td>
+			<td>{{ article.title }}</td>
+			<td>{{ article.content }}</td>
+		</tr>
+		{% endfor %}
+	{% else %}
+	<tr>
+		<td colspan="3">글이 없습니다</td>
+	</tr>
+	{% endif %}
+	</tbody>
+</table>
+{% endblock %}

@@ -40,6 +40,10 @@
   ```
 
   등록
+  
+- 실행
+
+  python manage.py runserver
 
 
 
@@ -107,6 +111,19 @@
 
 - pip install django_extenstions
 - settings.py > INSTALLED_APPS > django_extensions 추가
+- pip install jupyter notebook?이였던가 (명령어 확인 필요) 쥬피터 노트북 확인 가능
+
+
+
+### django extentions
+
+- layout 가져갈 곳에다가
+
+  `{% block [변수명] %}{% endblcok %}`
+
+  layout을 사용할 곳에서는
+
+  `{% extends '[앱이름]/[파일이름]' %}`
 
 
 
@@ -287,15 +304,33 @@ from [앱이름].models  import [클래스이름]
 
 
 
-## PYCHARM 단축키
+## Django 관련 팁
 
-### html 기본 폼 만들때
+### URL name
 
-- `! + TAB`
+- URL사용시 하나 바꾸면 여러군데 싹다 바꿔야 되는 경우가 많음
 
-### 정렬
+  urls.py 하나 바꾸면 엮여있는 html파일들 많이 바꿔야됨
 
-- `CTRL + SHIFT + ALT + L`
+- urls.py
+
+  ```python
+  app_name = "[앱이름(꼭 앱이름 아니여도됨)]"
+  urlpatterns = [
+      path("[경로]", views[함수명], name="[이 경로를 어떤것으로 부를건지]")
+  ]
+  ```
+
+- sample.html
+
+  ```html
+  <form action="url '{% 앱이름:지정했던 name %}'">
+      ... 코드 들어갈 자리
+  </form>
+  ```
+
+  
+
 
 
 
@@ -309,3 +344,15 @@ from [앱이름].models  import [클래스이름]
 ```
 
 하면 보임
+
+
+
+### PYCHARM 단축키
+
+#### html 기본 폼 만들때
+
+- `! + TAB`
+
+#### 정렬
+
+- `CTRL + SHIFT + ALT + L`
