@@ -23,15 +23,18 @@ def create_form(request):
 
 
 def create(request):
-	title = request.POST.get('title')
-	content = request.POST.get('content')
+	if request.method == "GET":
+		return render(request, 'articles/form.html')
+	else:
+		title = request.POST.get('title')
+		content = request.POST.get('content')
 
-	article = Article()
-	article.title = title
-	article.content = content
-	article.save()
+		article = Article()
+		article.title = title
+		article.content = content
+		article.save()
 
-	return redirect('articles:index')
+		return redirect('articles:index')
 
 
 def update_form(request, article_id):
@@ -42,12 +45,19 @@ def update_form(request, article_id):
 	})
 
 
-def update(request):
-	article = Article.objects.get(id=request.POST.get('id'))
-	article.title = request.POST.get('title')
-	article.content = request.POST.get('content')
-	article.save()
-	return redirect('/articles/')
+def update(request, article_id):
+	if request.method == "GET":
+		article = Article.objects.get(id=article_id)
+		return render(request, 'articles/form.html', {
+			'title': '업데이트폼',
+			'article': article,
+		})
+	else:
+		article = Article.objects.get(id=request.POST.get('id'))
+		article.title = request.POST.get('title')
+		article.content = request.POST.get('content')
+		article.save()
+		return redirect('/articles/')
 
 
 def delete(request, article_id):

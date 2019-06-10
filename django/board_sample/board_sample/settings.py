@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 추가된거
     'articles',
+    'board',
 ]
 
 MIDDLEWARE = [

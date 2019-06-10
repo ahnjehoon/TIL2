@@ -1,0 +1,13 @@
+{% extends 'board/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<div class="card" >
+	<img src="https://picsum.photos/1024/150" class="card-img-top" alt="...">
+	<div class="card-body">
+		<h5 class="card-title">{{ board.title }}</h5>
+		<p class="card-text">{{ board.content }}</p>
+		<a class="btn btn-warning" href="{% url 'board:update' board.id %}" role="button">수정</a>
+		<a class="btn btn-danger" href="{% url 'board:delete' board.id %}" role="button">삭제</a>
+	</div>
+</div>
+{% endblock %}

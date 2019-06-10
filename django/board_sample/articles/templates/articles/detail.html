@@ -6,7 +6,7 @@
 	<div class="card-body">
 		<h5 class="card-title">{{ article.title }}</h5>
 		<p class="card-text">{{ article.content }}</p>
-		<a class="btn btn-info" href="{% url 'articles:update_form' article.id %}" role="button">수정</a>
+		<a class="btn btn-info" href="{% url 'articles:update' article.id %}" role="button">수정</a>
 		<a class="btn btn-danger" href="{% url 'articles:delete' article.id %}" role="button">삭제</a>
 	</div>
 </div>

@@ -1,0 +1,28 @@
+{% extends 'board/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<table class="table">
+	<thead>
+	<tr>
+		<th scope="col">id</th>
+		<th scope="col">제목</th>
+		<th scope="col">내용</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% if boards %}
+	{% for board in boards %}
+	<tr onclick="location.href='{% url 'board:detail' board.id %}'">
+		<th scope="row">{{ board.id }}</th>
+		<td>{{ board.title }}</td>
+		<td>{{ board.content }}</td>
+	</tr>
+	{% endfor %}
+	{% else %}
+	<tr>
+		<td colspan="3">글을 등록해주세요</td>
+	</tr>
+	{% endif %}
+	</tbody>
+</table>
+{% endblock %}
