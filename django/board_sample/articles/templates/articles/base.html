@@ -19,7 +19,8 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		<div class="navbar-nav">
-			<a class="nav-item nav-link active" href="{% url 'articles:create' %}">새글쓰기<span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="{% url 'articles:create' %}">새글쓰기<span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="{% url 'articles:get_comments' %}">댓글보기<span class="sr-only">(current)</span></a>
 		</div>
 	</div>
 </nav>

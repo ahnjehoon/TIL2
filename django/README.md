@@ -292,7 +292,7 @@ from [앱이름].models  import [클래스이름]
 
    절대관리자를 생성
 
-4. DOMAIN/admin 에 접속
+4. [DOMAIN]/admin 에 접속
 
 5. 로그인
 
@@ -356,3 +356,15 @@ from [앱이름].models  import [클래스이름]
 #### 정렬
 
 - `CTRL + SHIFT + ALT + L`
+
+
+
+### 샘플 이미지 랜덤하게 뽑아주는곳
+
+- https://picsum.photos/1024/150
+
+
+
+### 127.0.0.1 / localhost
+
+- 서로 도메인이 다르면 쿠키에 저장된게 다르기 때문에 맞춰야함

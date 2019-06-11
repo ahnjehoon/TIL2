@@ -4,10 +4,34 @@
 <div class="card">
 	<img src="https://picsum.photos/1024/150" class="card-img-top">
 	<div class="card-body">
-		<h5 class="card-title">{{ article.title }}</h5>
-		<p class="card-text">{{ article.content }}</p>
+		<h5 class="card-title">글번호 : {{ article.title }} | 작성자 : {{ article.user }}</h5>
+		<p class="card-text">내용 : {{ article.content }}</p>
 		<a class="btn btn-info" href="{% url 'articles:update' article.id %}" role="button">수정</a>
 		<a class="btn btn-danger" href="{% url 'articles:delete' article.id %}" role="button">삭제</a>
 	</div>
 </div>
+
+<!--댓글 작성-->
+<form action="{% url 'articles:create_comment' article.id %}" method="POST">
+	{% csrf_token %}
+	<div class="form-group">
+		<label for="comment">댓글 달기</label>
+		<input type="text" class="form-control" id="comment" name="content"
+			   placeholder="입력해주세요">
+	</div>
+	<button type="submit" class="btn btn-outline-danger">댓글 등록</button>
+</form>
+{% for comment in article.comment_set.all %}
+<div class="card my-3">
+	<div class="card-body">
+		<h5 class="card-title">{{comment.id}} 번 댓글 | 작성자 : {{comment.user}}</h5>
+		<div class="d-flex bd-highlight">
+			<div class="p-2 bd-highlight">{{comment.content}}</div>
+			<div class="ml-auto p-2 bd-highlight"><a href="{% url 'articles:delete_comment' article.id comment.id %}" class="btn btn-outline-success">삭제 </a></div>
+		</div>
+
+	</div>
+</div>
+{% endfor %}
+<!--댓글확인-->
 {% endblock %}
