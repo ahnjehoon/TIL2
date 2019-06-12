@@ -1,0 +1,11 @@
+<div class="card">
+	<img src="https://picsum.photos/id/{{ post.id }}/280/200" class="card-img-top" alt="...">
+	<div class="card-body">
+		<h5 class="card-title">{{ post.id }}</h5>
+		<p class="card-text">{{ post.content }}</p>
+		<p class="text-right">
+			<a class="btn btn-primary" href="{% url 'posts:update' post.id %}" role="button">수정</a>
+			<a class="btn btn-danger" href="{% url 'posts:delete' post.id %}" role="button">삭제</a>
+		</p>
+	</div>
+</div>

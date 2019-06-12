@@ -1,0 +1,12 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<h1><i class="fab fa-instagram"></i> 갸아아악</h1>
+<div class="row">
+	{% for post in posts %}
+		{% include 'posts/_post.html' %}
+	{% endfor %}
+</div>
+{% endblock %}
