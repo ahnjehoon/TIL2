@@ -1,9 +1,9 @@
 {% extends 'posts/base.html' %}
 {% load bootstrap4 %}
-{% block title %}{% endblock %}
+{% block title %}회원가입폼{% endblock %}
 
 {% block body %}
-<form method="post" enctype="multipart/form-data">
+<form action="" method="POST">
 	{% csrf_token %}
 	{% bootstrap_form form %}
 	<button type="submit" class="btn btn-outline-primary">등록</button>

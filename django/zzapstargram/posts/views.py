@@ -6,7 +6,7 @@ from .forms import PostForm
 # Create your views here.
 def index(request):
 	return render(request, 'posts/index.html', {
-		'posts': Post.objects.all()
+		'posts': Post.objects.all().order_by('-id')
 	})
 
 
@@ -26,7 +26,7 @@ def create(request):
 	else:
 		# 5. post방식으로 저장요청을 받고, 데이터를 받아서 PostForm을 인스턴스화 함
 		# 10. 데이터를 받아서 postform을 인스턴스화 한다.
-		form = PostForm(request.POST)
+		form = PostForm(request.POST, request.FILES)
 		# 6. 데이터 검증을 함
 		# 11. 데이터 검증을 한다
 		if form.is_valid():
@@ -48,7 +48,7 @@ def update(request, post_id):
 	if request.method == "GET":
 		form = PostForm(instance=post)
 	else:
-		form = PostForm(request.POST, instance=post)
+		form = PostForm(request.POST, request.FILES, instance=post)
 		if form.is_valid():
 			form.save()
 			return redirect('posts:index')
