@@ -329,7 +329,21 @@ from [앱이름].models  import [클래스이름]
   </form>
   ```
 
-  
+
+
+
+### 내용 + 파일을 넘겨주고 싶을 때
+
+- form 에다 enctype="multipart/"
+- views.py에
+
+
+
+### 강제로 에러 발생시키고 싶을 때
+
+- raise()
+
+
 
 ## Forms
 
@@ -370,3 +384,11 @@ from [앱이름].models  import [클래스이름]
 ### 127.0.0.1 / localhost
 
 - 서로 도메인이 다르면 쿠키에 저장된게 다르기 때문에 맞춰야함
+
+
+
+
+
+## 좋은 참고 자료
+
+- <https://wikidocs.net/book/837>

@@ -21,6 +21,10 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 ```
 
+### ForeignKey(외래키) 설정
+
+
+
 ## READ
 
 ```python
@@ -42,6 +46,31 @@ Comment.objects.filter(post=post).order_by('-created_at') # 생성 시점으로 
 1 models.py 기본값 세팅
 
 2 models.py 
+
+
+
+You are trying to add a non-nullable field '[컬럼명]' to post without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+
+1. 직접 집어넣기
+
+   이후 어떤 값을 넣을껀지 나옴
+
+2. 코드 수정하러가기
+
+   black=True
+
+
+
+## USER
+
+- `django.contrib.auth`
+
+  <https://docs.djangoproject.com/en/2.2/ref/contrib/auth/>
+
+- 
+
+
 
 
 

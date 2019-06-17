@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import Post
-from .forms import PostForm
+from .forms import *
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 def index(request):
+	posts = Post.objects.all().order_by('-id')
 	return render(request, 'posts/index.html', {
-		'posts': Post.objects.all().order_by('-id')
+		'posts': posts
+		, 'comment_form': CommentForm()
 	})
 
 
@@ -16,6 +19,7 @@ def detail(request, post_id):
 	})
 
 
+@login_required
 def create(request):
 	# 1. GET 방식으로 데이터를 입력할 수 있는 form 요청
 	# 4. 사용자가 데이터를 입력해서 post 요청을 보냄
@@ -31,7 +35,9 @@ def create(request):
 		# 11. 데이터 검증을 한다
 		if form.is_valid():
 			# 12. valid 하면 저장
-			form.save()
+			post = form.save(commit=False)
+			post.user = request.user
+			post.save()
 			return redirect('posts:index')
 		else:
 			# 7. 적절하지 않은 데이터가 들어옴
@@ -43,22 +49,68 @@ def create(request):
 	})
 
 
+@login_required
 def update(request, post_id):
 	post = Post.objects.get(id=post_id)
-	if request.method == "GET":
-		form = PostForm(instance=post)
+	if request.user == post.user or request.user.username == 'admin':
+		# 내가 작성한 글일 때
+		if request.method == "GET":
+			form = PostForm(instance=post)
+		else:
+			form = PostForm(request.POST, request.FILES, instance=post)
+			if form.is_valid():
+				form.save()
+				return redirect('posts:index')
+		return render(request, 'posts/form.html', {
+			'form': form
+		})
 	else:
-		form = PostForm(request.POST, request.FILES, instance=post)
-		if form.is_valid():
-			form.save()
-			return redirect('posts:index')
-		pass
-	return render(request, 'posts/form.html', {
-		'form': form
-	})
+		# 내가 작성하지 않은 글일 때
+		return redirect('posts:index')
 
 
+@login_required
 def delete(request, post_id):
 	post = Post.objects.get(id=post_id)
 	post.delete()
+	return redirect('posts:index')
+
+# 댓글다는곳
+@login_required
+def comment_create(request, post_id):
+	post = Post.objects.get(id=post_id)
+	if request.method == 'POST':
+		comment_form = CommentForm(request.POST)
+		if comment_form.is_valid():
+			comment = comment_form.save(commit=False)
+			comment.post = post
+			comment.user = request.user
+			comment.save()
+		return redirect('posts:index')
+	return render(request, 'posts/index.html', {
+		'comment_form': CommentForm()
+	})
+
+
+def comment_update(request, post_id):
+	return
+
+
+def comment_delete(request, post_id):
+	return
+
+
+@login_required
+def likes(request, post_id):
+	user = request.user
+	post = Post.objects.get(id=post_id)
+
+	# 이미 좋아요가 눌러졌으면
+	if user in post.like_users.all():
+		# 좋아요 취소
+		post.like_users.remove(user)
+	# 좋아요 안했으면
+	else:
+		# 좋아요
+		post.like_users.add(user)
 	return redirect('posts:index')
