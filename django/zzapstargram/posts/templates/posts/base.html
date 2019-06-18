@@ -36,6 +36,9 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:user_page' user.id %}">회원정보수정</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:logout' %}">로그아웃</a>
                 </li>
                 <li class="nav-item">

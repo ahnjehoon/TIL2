@@ -373,6 +373,10 @@ from [앱이름].models  import [클래스이름]
 
 - `CTRL + SHIFT + ALT + L`
 
+#### 태그 + 클래스
+
+- [태그명].[클래스명] + tab
+
 
 
 ### 샘플 이미지 랜덤하게 뽑아주는곳
@@ -387,8 +391,17 @@ from [앱이름].models  import [클래스이름]
 
 
 
+### APP 마다 manage.py가 있는 이유
+
+- 관리자 페이지를 들어가보면 앱마다 정의된 모델 확인 가능함
+- 걍 루트에다가 만들어도 됨
+
 
 
 ## 좋은 참고 자료
 
 - <https://wikidocs.net/book/837>
+
+- CSS 연습
+
+  FLEXBOX FROGGY

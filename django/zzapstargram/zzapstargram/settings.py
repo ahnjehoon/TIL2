@@ -109,3 +109,4 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 # 이 프로젝트가 돌아가는 환경은 언제든지 달라질 수 있기 때문에
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+AUTH_USER_MODEL = 'accounts.User'

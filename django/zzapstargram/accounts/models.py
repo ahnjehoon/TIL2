@@ -1,5 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+
 
 # Create your models here.
-class Account(models.Model):
-	pass
+class User(AbstractUser, models.Model):
+	# 클래스가 완성되지 않은 상태에서 User클래스를 만드려면 오류가 뜸
+	# 그래서 꼼수로 settings.AUTH_USER_MODEL 쓰면 됨
+	follow = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="follower")
