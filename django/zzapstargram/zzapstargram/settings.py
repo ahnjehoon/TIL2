@@ -23,11 +23,19 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.sites',
 	# 추가된 거
 	'posts',
 	'bootstrap4',
 	'imagekit',
 	'accounts',
+	# auth
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+	'allauth.socialaccount.providers.facebook',
+	'allauth.socialaccount.providers.kakao',
+	'allauth.socialaccount.providers.naver',
 ]
 
 MIDDLEWARE = [
@@ -104,9 +112,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, "static"),
+]
+
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 # 이 프로젝트가 돌아가는 환경은 언제든지 달라질 수 있기 때문에
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = (
+	# Needed to login by username in Django admin, regardless of `allauth`
+	'django.contrib.auth.backends.ModelBackend',
+	# `allauth` specific authentication methods, such as login by e-mail
+	'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = 'posts:all'

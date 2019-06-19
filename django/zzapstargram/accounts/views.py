@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
-from .forms import CustomUserCreationForm
+from .forms import *
 from .models import User
 from django.contrib.auth.decorators import login_required
 
@@ -50,6 +50,7 @@ def user_page(request, user_id):
 	}
 	return render(request, 'accounts/user_page.html', context)
 
+
 @login_required
 def follow(request, user_id):
 	user = request.user
@@ -63,3 +64,21 @@ def follow(request, user_id):
 			follow_user.follower.add(user)
 	# return redirect('accounts:user_page', user_id)
 	return redirect('posts:index')
+
+
+@login_required
+def update(request, user_id):
+	user = User.objects.get(id=user_id)
+	if request.user == user:
+		if request.method == 'GET':
+			form = CustomUserChangeForm(instance=user)
+		else:
+			form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
+			if form.is_valid():
+				form.save()
+				return redirect("accounts:user_page", user_id)
+		return render(request, 'accounts/form.html', {
+			'form': form
+			,
+		})
+	return redirect('accounts:user_page', user_id)

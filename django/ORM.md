@@ -72,6 +72,14 @@ Please select a fix:
 
 
 
+## 두 결과물을 합치고 싶을 때
+
+- `from itertools import chain`
+
+
+
+
+
 
 
 ## 출처(아직 참고안한곳도 있음)

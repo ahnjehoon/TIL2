@@ -1,5 +1,8 @@
 {% extends 'posts/base.html' %}
+{% load static %}
 {% load bootstrap4 %}
+{% load socialaccount %}
+
 {% block title %}회원가입폼{% endblock %}
 
 {% block body %}
@@ -8,4 +11,9 @@
 	{% bootstrap_form form %}
 	<button type="submit" class="btn btn-outline-primary">로그인</button>
 </form>
+<a href="{% provider_login_url 'kakao' %}"><img src="{% static 'accounts/images/login/kakao_account_login_btn_large_wide.png' %}" alt="kakao-login" width="400" height="70"></a>
+<br>
+<a href="{% provider_login_url 'naver' %}"><img src="{% static 'accounts/images/login/네이버 아이디로 로그인_완성형_Green.PNG' %}" alt="naver-login" width="400" height="70"></a>
+
+
 {% endblock %}

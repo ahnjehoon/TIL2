@@ -304,6 +304,83 @@ from [앱이름].models  import [클래스이름]
 
 
 
+## 소셜 로그인
+
+1. 패키지 설치
+
+   ```python
+   pip install django-allauth
+   ```
+
+2. settings.py에 코드 추가
+
+   ```python
+   AUTHENTICATION_BACKENDS = (
+       # Needed to login by username in Django admin, regardless of `allauth`
+       'django.contrib.auth.backends.ModelBackend',
+       # `allauth` specific authentication methods, such as login by e-mail
+       'allauth.account.auth_backends.AuthenticationBackend',
+   )
+   
+   INSTALLED_APPS = [
+       ...
+       'django.contrib.sites',
+       'allauth',
+   	'allauth.account',
+   	'allauth.socialaccount',
+   	'allauth.socialaccount.providers.facebook',
+   	'allauth.socialaccount.providers.kakao',
+   	'allauth.socialaccount.providers.naver',
+       ...
+   ]
+   
+   SITE_ID = 1
+   
+   LOGIN_REDIRECT_URL = '[URL 설정]' # ex) 'posts:all'
+   ```
+
+3. root urls.py에 코드 추가
+
+   ```python
+   , path('accounts/', include('allauth.urls'))
+   ```
+
+4. admin 페이지 이동
+
+5. Social applications
+
+6. ADD SOCIAL APPLICATION
+
+   **Client id:** restAPI key 입력
+
+   **Secret key:** secret key 입력
+
+- 참고 <https://django-allauth.readthedocs.io/en/latest/installation.html>
+
+
+
+## root폴더 안에 있는 static 폴더에 접근
+
+1. settings.py
+
+   ```python
+   STATICFILES_DIRS = [
+      os.path.join(BASE_DIR, "static"),
+   ]
+   ```
+
+2. html
+
+   ```html
+   {% load static %}
+   
+   <img src="{% static '[경로]''">
+   ```
+
+
+
+
+
 ## Django 관련 팁
 
 ### URL name

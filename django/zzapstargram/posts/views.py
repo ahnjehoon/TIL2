@@ -2,10 +2,26 @@ from django.shortcuts import render, redirect
 from .models import Post
 from .forms import *
 from django.contrib.auth.decorators import login_required
+from itertools import chain
 
 
 # Create your views here.
 def index(request):
+	# posts = Post.objects.all().order_by('-id')
+	user = request.user
+	if user.is_authenticated:
+		user_follow = user.follow.all()
+		follow_list = chain(user_follow, [request.user])
+		posts = Post.objects.order_by('-id').filter(user__in=follow_list)
+	else:
+		posts = Post.objects.all().order_by('-id')
+	return render(request, 'posts/index.html', {
+		'posts': posts
+		, 'comment_form': CommentForm()
+	})
+
+
+def all(request):
 	posts = Post.objects.all().order_by('-id')
 	return render(request, 'posts/index.html', {
 		'posts': posts
@@ -74,6 +90,7 @@ def delete(request, post_id):
 	post = Post.objects.get(id=post_id)
 	post.delete()
 	return redirect('posts:index')
+
 
 # 댓글다는곳
 @login_required

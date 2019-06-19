@@ -1,5 +1,5 @@
 {% load bootstrap4 %}
-{% if request.resolver_match.url_name == 'index' %}
+{% if request.resolver_match.url_name == 'index' or request.resolver_match.url_name == 'all' %}
 <div class="card col-3 my-3">
 {% else %}
 <div class="card">
@@ -31,7 +31,7 @@
         </form>
     </div>
 
-	{% if request.resolver_match.url_name == 'index' %}
+	{% if request.resolver_match.url_name == 'index' or request.resolver_match.url_name == 'all' %}
     <!--댓글 출력-->
     <div class="card-body">
         {% for comment in post.comment_set.all %}
