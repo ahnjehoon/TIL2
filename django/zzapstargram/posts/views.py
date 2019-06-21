@@ -3,6 +3,7 @@ from .models import Post
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from itertools import chain
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -23,6 +24,7 @@ def index(request):
 
 def all(request):
 	posts = Post.objects.all().order_by('-id')
+
 	return render(request, 'posts/index.html', {
 		'posts': posts
 		, 'comment_form': CommentForm()
@@ -54,6 +56,20 @@ def create(request):
 			post = form.save(commit=False)
 			post.user = request.user
 			post.save()
+
+			# 해시태그 추가
+			content = form.cleaned_data.get('content')
+			words = content.split()
+
+			for word in words:
+				if word[0] == "#":
+					# 해시태그 생성
+					# 중복 처리, 배열을 뱉음
+					# 0번째는 객체, 1번째는 가져와 졌는지 못가져왔는지
+					hashTag = HashTag.objects.get_or_create(content=word)
+					# 해시태그와 post를 연결
+					post.hash_tags.add(hashTag[0])
+
 			return redirect('posts:index')
 		else:
 			# 7. 적절하지 않은 데이터가 들어옴
@@ -74,9 +90,23 @@ def update(request, post_id):
 			form = PostForm(instance=post)
 		else:
 			form = PostForm(request.POST, request.FILES, instance=post)
+
 			if form.is_valid():
-				form.save()
+				post = form.save(commit=False)
+				post.user = request.user
+				post.save()
+
+				post.hash_tags.clear()
+
+				content = form.cleaned_data.get('content')
+				words = content.split()
+
+				for word in words:
+					if word[0] == "#":
+						hashTag = HashTag.objects.get_or_create(content=word)
+						post.hash_tags.add(hashTag[0])
 				return redirect('posts:index')
+
 		return render(request, 'posts/form.html', {
 			'form': form
 		})
@@ -126,8 +156,34 @@ def likes(request, post_id):
 	if user in post.like_users.all():
 		# 좋아요 취소
 		post.like_users.remove(user)
+		is_like = False
 	# 좋아요 안했으면
 	else:
 		# 좋아요
 		post.like_users.add(user)
-	return redirect('posts:index')
+		is_like = True
+
+	# return redirect('posts:index')
+	like_count = post.like_users.count()
+	return JsonResponse({
+		'is_like': is_like,
+		'like_count': like_count
+	})
+
+
+def hashtags(request, hashtag_id):
+	hashtag = HashTag.objects.get(id=hashtag_id)
+	posts = hashtag.post_set.all()
+
+	comment_form = CommentForm()
+	return render(request, 'posts/index.html', {
+		'posts': posts
+		, 'comment_form': comment_form
+		, 'hashtag': hashtag
+	})
+
+
+def javascript(request):
+	return render(request, 'posts/javascript.html', {
+
+	})

@@ -379,6 +379,12 @@ from [앱이름].models  import [클래스이름]
 
 
 
+## custom templatetages
+
+1. app 폴더에 templatetags 폴더 생성
+2. `__init__.py`생성
+3. 
+
 
 
 ## Django 관련 팁
@@ -453,6 +459,13 @@ from [앱이름].models  import [클래스이름]
 #### 태그 + 클래스
 
 - [태그명].[클래스명] + tab
+
+
+
+### axios
+
+- jQuery같은경우 ajax를 쓰려할때 좀 무거운 경향이 있음
+- 이건 가벼움
 
 
 
