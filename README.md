@@ -212,7 +212,19 @@
    git push -u --force origin master
    ```
 
+### 특정 파일 제외하기 .gitignore
+
+- `.gitignore`파일을 만들고 안에다가 적으면됨
+
+- 만약 특정폴더의 하위폴더를 포함시키고 싶지 않다면
+
+  
 
 
-출처 : <https://github.com/KennethanCeyer/tutorial-git>
+
+
+
+
+
+참고 : <https://github.com/KennethanCeyer/tutorial-git>
 
