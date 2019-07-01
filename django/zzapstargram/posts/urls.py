@@ -16,5 +16,7 @@ urlpatterns = [
 	, path('<int:post_id>/comment/delete/', views.comment_delete, name="comment_delete")
 	# 좋아요
 	, path('<int:post_id>/likes/', views.likes, name="likes")
+	# hashtag
+	, path('hashtags/<int:hashtag_id>/', views.hashtags, name="hashtags")
 ]
 

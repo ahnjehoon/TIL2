@@ -1,8 +1,15 @@
 {% extends 'posts/base.html' %}
 
-{% block title %}{% endblock %}
+{% block title %}짭스타그램{% endblock %}
 
 {% block body %}
+{% if request.resolver_match.url_name == 'index' %}
+	<h1>index</h1>
+{% elif request.resolver_match.url_name == 'all' %}
+	<h1>전체목록</h1>
+{% else %}
+	<h1>{{ hashtag }}</h1>
+{% endif %}
 <div class="row">
 	{% for post in posts %}
 		{% include 'posts/_post.html' %}
