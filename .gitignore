@@ -7,4 +7,4 @@ ML/3min DL/mnist/*
 ML/3min DL/mnist/**
 ML/3min DL/mnist/data/*
 ML/3min DL/mnist/data/**
-test/*
+react/node_modules/**

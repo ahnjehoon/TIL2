@@ -18,3 +18,12 @@
 - 한국어 버전
 
   <http://guny.kr/stuff/klorem/>
+
+## 쥬피터 설치
+
+```shell
+pip install --upgrade pip
+pip install jupyter
+```
+
+이후 jupyer notebook 으로 실행
