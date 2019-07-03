@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+</head>
+
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		// React로 DOM 내용 변경
+		ReactDOM.render(
+			getDOM(),
+			document.getElementById('root')
+		);
+		//요소 반환 함수
+		function getDOM() {
+			return (
+				<div>
+					<p>하이하이</p>
+					<p>바이바이</p>
+				</div>
+			)
+		}
+	</script>
+	
+</body>
+
+</html>
