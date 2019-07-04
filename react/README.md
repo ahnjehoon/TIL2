@@ -134,9 +134,56 @@
   ReactDOM.render(dom, document.getElementById('root'))
   ```
 
-  
+- 화살표 함수로 만드는 컴포넌트 예시
 
+  ```html
+  <div id="root"></div>
+  <script type="text/babel">
+  	const TitleParts = (props) => (
+  		<div style={{backgroundColor: 'red', color: 'white'}}>
+  		<h3>{props.title}</h3>
+      </div>
+  	)
+  	const ContentParts = (props) => (
+  		<div style={{border: '1px solid blue', margin: 15}}>
+  		<div>줄거리: {props.body}</div>
+      </div>
+  	)
+  	// 메인 컴포넌트
+  	const Book = (props) => (
+      <div>
+  		<TitleParts title={props.title} />
+  		<ContentParts body={props.body} />
+      </div>
+  	)
+  	// 리액트로 DOM의 내용을 변경합니다.
+  	ReactDOM.render(
+  		(<div>
+  		<Book title='삼국지' body='옛날 중국 이야기' />
+  		<Book title='민수기' body='옛날 이스라엘 이야기' />
+  		<Book title='서유기' body='원숭이가 활약하는 이야기' />
+      </div>),
+  		document.getElementById('root'))
+  </script>
+  ```
 
+- 위의 컴포넌트 예제들은 특정한 상태를 가지지 않았음(stateless 컴포넌트)
+
+  체크박스처럼 어떤 상태를 가지거나 외관상 크게 변화하는 컴포넌트의 경우 상태를 갖게 하고 관리해야함
+
+  이때 state 객체를 사용하며 값을 변경 시에  setState() 메서드를 사용함
+
+  ```react
+  class [컴포넌트 이름] extends React.Component {
+      constructor (props) {
+          this.state = { [초기값] }
+      }
+      // 상태 참조시
+      console.log( this.state.[이름] )
+      // 상태 변경시
+      this.setState( { [이름]: [새로운 값] } )
+  }
+  ```
 
 
 
