@@ -185,7 +185,35 @@
   }
   ```
 
+## react app create
 
+1. 리액트 개발환경 구축
+
+   npm install -g create-react-app
+
+2. 프로젝트 생성
+
+   create-react-app [생성할프로젝트명]
+
+   모듈이 엄청 많이 설치되서 시간이 약간 걸림
+
+3. 실행
+
+   cd [생성한프로젝트명]
+
+   npm start
+
+   ### 배포
+
+   1. npm run build
+
+   2. 웹서버 설치
+
+      npm install -g serve
+
+   3. 서버 실행
+
+      serve -s build
 
 # Node.js
 
@@ -248,4 +276,106 @@
   babel node_module_test_main2.js -d node_module_test_main2_result.js
   ```
 
-  
+
+
+
+## 웹팩 webpack
+
+- 자바스크립트 또는 CSS 등의 리소스 파일을 하나로 합쳐주거나, JSX처럼 특수한 기법으로 작성된 파일을 변환하는 도구
+- 웹 앱은 다양한 리소스(JS, CSS, IMG etc..)가 있는데, 웹팩은 이런것들을 최적의 형태로 변환해줌
+
+1. 설치
+
+   npm install -g webpack webpack-cli
+
+2. 예제 파일 작성
+
+   ```javascript
+   // calc.js
+   export function mul (a, b) {
+       return a * b
+   }
+   
+   // main.js
+   import {mul} from './calc'
+   const a = mul(3, 5)
+   console.log(a)
+   ```
+
+3. webpack main.js --output out.js
+
+4. node out.js해서 제대로 작동되는지 확인
+
+###  변환 설정 파일 제작
+
+- webpack.config.js 파일 생성
+
+- webpack으로 실행
+
+  webpack -p 배포 전용으로 최적화 빌드
+
+  webpack --watch 개발 전용으로 감시 모드 적용
+
+  이때는 코드를 실시간으로 보면서 코드 작성이 가능하다고 함
+
+- 다른이름으로 저장시
+
+  webpack --config webpack.config.js
+
+## 웹팩으로 React/JSX 빌드
+
+1. package.json 생성
+
+   npm init
+
+2. 모듈 설치
+
+3. webpack.config.js 생성
+
+4. 소스코드 작성 후 webpack으로 명령어 컴파일
+
+1. 웹팩 설치
+
+   npm i --save-dev webpack
+
+2. 리액트 설치
+
+   npm i --save-dev react react-dom
+
+3. 바벨과 ES2015/리액트 프리셋 설치
+
+   npm i --save-dev babel-loader babel-core babel-preset-es2015 babel-preset-react
+
+4. 웹팩 설정파일 작성
+
+   ```javascript
+   //webpack.config.js
+   module.exports = {
+       entry: './src/main.js',
+       output: {
+           filename: './out/bundle.js'
+       },
+       module: {
+           rules: [
+               {
+                   // 파일 패턴 지정
+                   test: /.js$/, 
+                   // 어떤 플러그인을 사용할껀지
+                   loader: 'babel-loader', 
+                   // 플러그인의 옵션 지정
+                   options: {
+                       presets:['es2015', 'react']
+                   }
+               }
+           ]
+       }
+   }
+   ```
+
+5. webpack
+
+6. serve
+
+# 기타
+
+- npm i 는 npm install과 같은 의미임
