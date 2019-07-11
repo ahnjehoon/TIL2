@@ -8,3 +8,4 @@ ML/3min DL/mnist/**
 ML/3min DL/mnist/data/*
 ML/3min DL/mnist/data/**
 react/node_modules/**
+ch3/node_modules/**

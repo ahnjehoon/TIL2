@@ -185,6 +185,23 @@
   }
   ```
 
+### 라이프 사이클
+
+- 리액트 컴포넌트는 생성, 파괴, 상태 변화등의 시점에 자동으로 호출되는 메서드가 있음
+
+- 생성과 DOM에 마운트
+
+  1. constructor(props) - 객체 생성시
+  2. componentWillMount() - 컴포넌트가 DOM에 마운트 되기 직전
+  3. render() - 컴포넌트가 렌더링 될 때
+  4. componentDidMount() - 컴포넌트가 DOM에 마운트된 직후
+
+- 컴포넌트 업데이트
+
+  프로퍼티 변경시 다음과 같은 메서드 호출
+
+  1. componentWillReceiveProps(nextProps) - 컴퐅넌트의 프로퍼티 변경시
+
 ## react app create
 
 1. 리액트 개발환경 구축
@@ -214,6 +231,8 @@
    3. 서버 실행
 
       serve -s build
+
+
 
 # Node.js
 
