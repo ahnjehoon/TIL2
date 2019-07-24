@@ -200,7 +200,25 @@
 
   프로퍼티 변경시 다음과 같은 메서드 호출
 
-  1. componentWillReceiveProps(nextProps) - 컴퐅넌트의 프로퍼티 변경시
+  - componentWillReceiveProps(nextProps)
+
+    컴포넌트의 프로퍼티 변경시
+
+    새로운 속성을 받았을 때 호출
+
+    여기서 setState() 메서드를 호출해서 컴포넌트의 상태 변경 가능. 다른데서 사용하면 업데이트 이벤트 재귀 발생
+
+  - shouldComponentUpdate(nextProps, nextState) - 컴포넌트의 외관을 변경해도 좋을지 판단할 때
+
+  - componentWillUpdate() - 컴포넌트가 업데이트되기 직전
+
+  - render() - 컴포넌트가 렌더링 될 때
+
+  - componentDidUpdate()
+
+- DOM에서 언마운트(제거)
+
+  1. componentWillUnmount()
 
 ## react app create
 
@@ -397,4 +415,4 @@
 
 # 기타
 
-- npm i 는 npm install과 같은 의미임
+- npm i 는 npm install과 같은 의미임b
