@@ -230,11 +230,41 @@
 
   ![폴더명]/살릴경로
 
+### cherry pick
 
 
 
+### 
 
 
+
+### 로그인 계정 잘못입력시
+
+- 자격 증명 관리에 들어가서
+- 삭제하자
 
 참고 : <https://github.com/KennethanCeyer/tutorial-git>
 
+
+
+### master (pre-receive hook declined) gitlab
+
+- Settings > Repository > Protected Branches
+  - 현재 계정 권한이 maintainer 임에도 불구하고 master branch를 날리지 못함(버그로 예상)
+  - 리스트중 master branch로 되어 있는 부분 Unprotect
+
+
+
+### 캐쉬삭제
+
+- .gitignore에 등록해도 등록이 되는 경우가 있음
+
+- 캐쉬 삭제
+
+  ```shell
+  git rm -r --cached .
+  git add .
+  git commit -m "fix track"
+  ```
+
+- 이후 트래킹이 될 떄는 remote repository를 colne받으면 해결이 된다고함
