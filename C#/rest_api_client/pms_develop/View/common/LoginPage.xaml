@@ -1,0 +1,103 @@
+﻿<Window x:Class="pms_develop.View.common.LoginPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pms_develop.View.common"
+        mc:Ignorable="d"
+        Title="Login" Height="500" Width="350"
+        AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        MouseDown="Window_MouseDown"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <!-- 배경 영역 -->
+        <!--<Rectangle Height="500" VerticalAlignment="Top">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
+                    <GradientStop Color="#FFFF99D1"/>
+                    <GradientStop Color="#FFFF968A" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border CornerRadius="10" Grid.RowSpan="2">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#7be9f6" Offset="0.0"/>
+                        <GradientStop Color="#f083da" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <!-- 배경 끝 -->
+
+            <!--상단-->
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="LOGIN"
+                           FontWeight="Light"
+                           FontSize="40"
+                           Foreground="white"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!--로그인-->
+            <StackPanel Grid.Row="1">
+                <StackPanel>
+                    <TextBox x:Name="IDTextBox"
+                        FontWeight="Light"
+                        Text="ID"
+                        FontSize="25"
+                        HorizontalAlignment="Left"
+                        Foreground="White"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Width="250"
+                        HorizontalContentAlignment="Left"
+                        Opacity="0.5"
+                        Margin="55,0,0,0"/>
+                </StackPanel>
+                <Border Width="250"
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+
+                <StackPanel>
+                    <PasswordBox x:Name="PasswordPasswordBox"
+                        FontWeight="Light"
+                        Password="passowrd"
+                        FontSize="20"
+                        HorizontalAlignment="Left"
+                        Foreground="White"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Width="250"
+                        HorizontalContentAlignment="Left"
+                        Opacity="0.5"
+                        Margin="55,10,0,0"/>
+                </StackPanel>
+                <Border Width="250"
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                    <Button Width="250" Height="50" Content="LOGIN" Margin="50,10,0,0" Click="Login_Button_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            
+        </Grid>
+    </Grid>
+</Window>

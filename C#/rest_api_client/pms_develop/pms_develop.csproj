@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Model\ORMDataModel1.xpo" />
+    <None Remove="Model\ORMDataModel1.xpo.diagram" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resource\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UtilLibrary\UtilLibrary.csproj" />
+  </ItemGroup>
+
+</Project>
