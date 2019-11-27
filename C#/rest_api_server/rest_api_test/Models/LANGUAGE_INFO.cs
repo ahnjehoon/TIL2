@@ -1,5 +1,4 @@
-﻿using rest_api_test.Util;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace rest_api_test.Models

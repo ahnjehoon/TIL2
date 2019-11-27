@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using rest_api_test.Models;
 using rest_api_test.Util;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +32,6 @@ namespace rest_api_test.Controllers
             }
             _context = list;
         }
-
         [HttpGet]
         public IEnumerable<LANGUAGE_INFO> Get()
         {
@@ -50,7 +51,30 @@ namespace rest_api_test.Controllers
             //return _context.Select(Idx => Idx).Where(p => p.LANGUAGE_CODE.Contains("1")).ToArray();
             return _context;
         }
-
+        [Route("dbTest")]
+        [HttpGet]
+        public IEnumerable<LANGUAGE_INFO> dbTest()
+        {
+            DbSet<LANGUAGE_INFO> result = null;
+            try
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    result = db.LANGUAGE_INFO;
+                }
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(@"@@@@ {e.Message}");
+            }
+            return result;
+        }
+        [Route("hihi2")]
+        [HttpGet]
+        public string hihi()
+        {
+            return "hihi";
+        }
 
 
     }

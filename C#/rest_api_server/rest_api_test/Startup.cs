@@ -3,10 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using rest_api_test.Models;
-using Pomelo.EntityFrameworkCore.MySql;
-using rest_api_test.Util;
-using Microsoft.EntityFrameworkCore;
 
 namespace rest_api_test
 {
@@ -23,9 +19,6 @@ namespace rest_api_test
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
