@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using rest_api_test.Models;
+using rest_api_test.Util;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,11 @@ namespace rest_api_test.Controllers
         [HttpGet]
         public IEnumerable<LANGUAGE_INFO> Get()
         {
+            using (var context = new ApplicationDbContext())
+            {
+                context.Database.EnsureCreated();
+            }
+
             return _context.Select(Idx => Idx)
                 .Where(p => p.LANGUAGE_CODE.Contains("1")).ToArray();
         }

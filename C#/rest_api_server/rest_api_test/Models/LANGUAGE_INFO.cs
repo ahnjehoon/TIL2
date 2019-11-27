@@ -1,4 +1,5 @@
-﻿using System;
+﻿using rest_api_test.Util;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace rest_api_test.Models
@@ -17,5 +18,6 @@ namespace rest_api_test.Models
 
         // 일본어 
         public String LANGUAGE_VALUE3 { get; set; }
+
     }
 }
