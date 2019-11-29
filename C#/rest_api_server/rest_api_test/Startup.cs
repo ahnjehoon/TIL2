@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using rest_api_test.Models;
 
 namespace rest_api_test
 {
@@ -19,6 +21,9 @@ namespace rest_api_test
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<MSSQLContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

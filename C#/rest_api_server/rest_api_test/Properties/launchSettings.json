@@ -19,8 +19,8 @@
     },
     "rest_api_test": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "hihi/dbTest",
+      "launchBrowser": false,
+      "launchUrl": "api/LANGUAGE_INFO",
       //"applicationUrl": "http://localhost:80;https://localhost:443;",
       "applicationUrl": "http://localhost:80;",
       "environmentVariables": {
