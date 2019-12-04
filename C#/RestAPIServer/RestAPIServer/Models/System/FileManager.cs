@@ -1,58 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace RestAPIServer.Models.System
 {
     // 파일관리자 
-    public class Filemanager
+    public class FileManager
     {
         // 파일고유값 
         [Key]
-        public int Filecode { get; set; }
+        public int FileCode { get; set; }
 
         // 원본파일명 
-        public string Originalfilename { get; set; }
+        public string OriginalFileName { get; set; }
 
         // 저장파일명 
-        public string Savefilename { get; set; }
+        public string SaveFileName { get; set; }
 
         // 파일크기 
-        public string Filesize { get; set; }
+        public string FileSize { get; set; }
 
         // 파일타입 
-        public string Filetype { get; set; }
+        public string FileType { get; set; }
 
         // 파일확장자 
-        public string Fileextension { get; set; }
+        public string FileExtension { get; set; }
 
         // 화면이름 
-        public string Windowname { get; set; }
+        public string WindowName { get; set; }
 
         // 등록자 
-        public string Regdate { get; set; }
+        public string RegDate { get; set; }
 
         // 화면별고유값 
-        public string Windowuniquecode { get; set; }
+        public string WindowUniqueCode { get; set; }
 
         // 등록일자 
-        public string Reguser { get; set; }
+        public string RegUser { get; set; }
 
-        // Filemanager 모델 복사
-        public void CopyData(Filemanager param)
+        // FileManager 모델 복사
+        public void CopyData(FileManager param)
         {
-            this.Filecode = param.Filecode;
-            this.Originalfilename = param.Originalfilename;
-            this.Savefilename = param.Savefilename;
-            this.Filesize = param.Filesize;
-            this.Filetype = param.Filetype;
-            this.Fileextension = param.Fileextension;
-            this.Windowname = param.Windowname;
-            this.Regdate = param.Regdate;
-            this.Windowuniquecode = param.Windowuniquecode;
-            this.Reguser = param.Reguser;
+            this.FileCode = param.FileCode;
+            this.OriginalFileName = param.OriginalFileName;
+            this.SaveFileName = param.SaveFileName;
+            this.FileSize = param.FileSize;
+            this.FileType = param.FileType;
+            this.FileExtension = param.FileExtension;
+            this.WindowName = param.WindowName;
+            this.RegDate = param.RegDate;
+            this.WindowUniqueCode = param.WindowUniqueCode;
+            this.RegUser = param.RegUser;
         }
     }
 }

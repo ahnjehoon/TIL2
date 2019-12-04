@@ -1,31 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace RestAPIServer.Models
+﻿namespace RestAPIServer.Models
 {
     public class SensorStatisticsMonth
     {
-        // 센서고유값 
-        public string Sensorcode { get; set; }
-
-        // 값 
+        public string SensorCode { get; set; }
         public string Value { get; set; }
-
-        // 수집시작시간 
-        public long? Starttime { get; set; }
-
-        // 수집종료시간 
-        public long? Endtime { get; set; }
-
-        // Sensorstatisticsmonth 모델 복사
+        public long StartTime { get; set; }
+        public long EndTime { get; set; }
         public void CopyData(SensorStatisticsMonth param)
         {
-            this.Sensorcode = param.Sensorcode;
+            this.SensorCode = param.SensorCode;
             this.Value = param.Value;
-            this.Starttime = param.Starttime;
-            this.Endtime = param.Endtime;
+            this.StartTime = param.StartTime;
+            this.EndTime = param.EndTime;
         }
     }
 }

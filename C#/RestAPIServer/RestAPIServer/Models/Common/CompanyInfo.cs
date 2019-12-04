@@ -1,72 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestAPIServer.Models.Common
 {
     // 회사 정보 
-    public class Companyinfo
+    public class CompanyInfo
     {
         // 거래처코드 
-        public string Companycode { get; set; }
+        [Key]
+        public string CompanyCode { get; set; }
 
         // 거래처구분 
-        public string Companytype { get; set; }
+        public string CompanyType { get; set; }
 
         // 거래처명칭 
-        public string Companyname { get; set; }
+        public string CompanyName { get; set; }
 
         // 거래처별칭 
-        public string Companyalias { get; set; }
+        public string CompanyAlias { get; set; }
 
         // 개업년월일 
-        public DateTime Vendopendate { get; set; }
+        public DateTime VendOpenDate { get; set; }
 
         // 전화번호 
-        public string Vendtel { get; set; }
+        public string VendTel { get; set; }
 
         // 팩스번호 
-        public string Vendfax { get; set; }
+        public string VendFax { get; set; }
 
         // 이메일 
-        public string Vendemail { get; set; }
+        public string VendEmail { get; set; }
 
         // 비고 
         public string Comment { get; set; }
 
         // 사용유무 
-        public string Useyn { get; set; }
+        public string UseYn { get; set; }
 
         // 수정일자 
-        public DateTime Update { get; set; }
+        public DateTime UpDate { get; set; }
 
         // 수정자 
-        public string Upuser { get; set; }
+        public string UpUser { get; set; }
 
         // 등록일자 
-        public DateTime Regdate { get; set; }
+        public DateTime RegDate { get; set; }
 
         // 등록자 
-        public string Reguser { get; set; }
+        public string RegUser { get; set; }
 
-        // Companyinfo 모델 복사
-        public void CopyData(Companyinfo param)
+        // CompanyInfo 모델 복사
+        public void CopyData(CompanyInfo param)
         {
-            this.Companycode = param.Companycode;
-            this.Companytype = param.Companytype;
-            this.Companyname = param.Companyname;
-            this.Companyalias = param.Companyalias;
-            this.Vendopendate = param.Vendopendate;
-            this.Vendtel = param.Vendtel;
-            this.Vendfax = param.Vendfax;
-            this.Vendemail = param.Vendemail;
+            this.CompanyCode = param.CompanyCode;
+            this.CompanyType = param.CompanyType;
+            this.CompanyName = param.CompanyName;
+            this.CompanyAlias = param.CompanyAlias;
+            this.VendOpenDate = param.VendOpenDate;
+            this.VendTel = param.VendTel;
+            this.VendFax = param.VendFax;
+            this.VendEmail = param.VendEmail;
             this.Comment = param.Comment;
-            this.Useyn = param.Useyn;
-            this.Update = param.Update;
-            this.Upuser = param.Upuser;
-            this.Regdate = param.Regdate;
-            this.Reguser = param.Reguser;
+            this.UseYn = param.UseYn;
+            this.UpDate = param.UpDate;
+            this.UpUser = param.UpUser;
+            this.RegDate = param.RegDate;
+            this.RegUser = param.RegUser;
         }
     }
 }
