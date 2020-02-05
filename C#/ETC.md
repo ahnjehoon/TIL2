@@ -67,6 +67,12 @@ SET SEQ = 0
 WHERE SEQ_NAME = 'EQUIPMENTPARTEXCHANGE';
 ```
 
+### DECIMAL 0 날리기
+
+```mysql
+( TRIM(TRAILING '.' FROM( CAST(TRIM(TRAILING '0' FROM VALUE)AS CHAR) )) ) AS  ALIAS
+```
+
 
 
 ### 최신값 가져와서 더하기
